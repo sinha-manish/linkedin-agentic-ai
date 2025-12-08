@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASS:-password123}
+      POSTGRES_DB: ${DB_NAME:-linkedin_ai}
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: linkedin-agentic-ai:latest
+    restart: always
+    env_file:
+      - .env.prod
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - NODE_ENV=production
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+    command: ["sh", "-c", "./scripts/wait-for-db.sh postgres 5432 npm run start"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4000/health || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata_prod:
