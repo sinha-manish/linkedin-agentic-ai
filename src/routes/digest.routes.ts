@@ -1,17 +1,16 @@
+//digest.route.ts
+
 import { Router } from "express";
 import { sendDailyDigestToAllUsers } from "../services/dailyDigest.service";
 
 const router = Router();
 /**
  * @openapi
- * /digest/send:
+ * /api/digest/send:
  *   get:
- *     summary: Manually trigger sending daily digests to all users
+ *     summary: Manually trigger daily digest sending
  *     tags:
  *       - Digest
- *     responses:
- *       200:
- *         description: Digest sent
  */
 
 router.get("/send", async (req, res) => {

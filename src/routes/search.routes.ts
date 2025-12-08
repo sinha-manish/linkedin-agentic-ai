@@ -1,3 +1,4 @@
+//search.route.ts
 import { Router } from "express";
 const db = require("../../sequelize/models");
 import { getEmbeddings } from "../utils/embeddings";
@@ -5,21 +6,15 @@ import { getEmbeddings } from "../utils/embeddings";
 const router = Router();
 /**
  * @openapi
- * /search:
+ * /api/search:
  *   get:
- *     summary: Semantic search across saved posts using pgvector
+ *     summary: Semantic search using embeddings + pgvector
  *     tags:
  *       - Search
  *     parameters:
  *       - in: query
  *         name: query
- *         schema:
- *           type: string
  *         required: true
- *         description: Search text to embed & compare
- *     responses:
- *       200:
- *         description: Ranked semantic results
  */
 
 /**
@@ -47,15 +42,15 @@ router.get("/", async (req, res) => {
     // Run semantic search using pgvector <-> operator
     const results = await db.sequelize.query(
       `
-      SELECT 
-        id,
-        content,
-        engagement_score,
-        embedding_vector <-> (:vector)::vector) AS distance
-      FROM "LinkedInPosts"
-      ORDER BY distance ASC
-      LIMIT 10;
-      `,
+  SELECT 
+    id,
+    content,
+    engagement_score,
+    embedding_vector <-> ARRAY[:...vector]::vector AS distance
+  FROM "LinkedInPosts"
+  ORDER BY distance ASC
+  LIMIT 10;
+  `,
       {
         replacements: { vector },
         type: db.Sequelize.QueryTypes.SELECT

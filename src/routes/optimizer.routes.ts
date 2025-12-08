@@ -1,33 +1,29 @@
+//optimizer.route.ts
 import { Router } from "express";
 import { engagementOptimizerAgent } from "../agents/engagementOptimizer.agent";
 
 const router = Router();
 /**
  * @openapi
- * /agent/post/write:
+ * /api/agent/optimize/:
  *   post:
- *     summary: Generate a LinkedIn-style post based on a topic + tone
+ *     summary: Optimize a LinkedIn post for maximum engagement
  *     tags:
  *       - Agents
  *     requestBody:
- *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               topic:
- *                 type: string
- *               tone:
- *                 type: string
- *               industry:
+ *               post:
  *                 type: string
  *     responses:
  *       200:
- *         description: Returns AI-generated post
+ *         description: Returns optimized post with score
  */
 
-router.post("/optimize", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { post } = req.body;
 

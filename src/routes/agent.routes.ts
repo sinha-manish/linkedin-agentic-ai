@@ -1,3 +1,4 @@
+// agent.route.ts
 import { Router } from "express";
 const db = require("../../sequelize/models");
 import { Sequelize } from "sequelize";
@@ -5,21 +6,14 @@ import { Sequelize } from "sequelize";
 const router = Router();
 /**
  * @openapi
- * /agent/topics:
+ * /api/agent/overview:
  *   get:
- *     summary: Get trending topics for a given industry
+ *     summary: Get AI system analytics (topics, provider usage, engagement)
  *     tags:
  *       - Agents
- *     parameters:
- *       - in: query
- *         name: industry
- *         schema:
- *           type: string
- *         required: true
- *         description: Industry name (e.g. ai, finance, saas)
  *     responses:
  *       200:
- *         description: Successfully retrieved trending topics
+ *         description: Returns aggregated AI analytics
  */
 
 /**

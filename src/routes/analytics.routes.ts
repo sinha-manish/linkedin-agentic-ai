@@ -1,9 +1,18 @@
+// analytics.route.ts
 import { Router } from "express";
 const db = require("../../sequelize/models");
 import { Sequelize } from "sequelize";
 
 const router = Router();
 
+/**
+ * @openapi
+ * /api/analytics/overview:
+ *   get:
+ *     summary: Get global analytics (topics, providers, engagement)
+ *     tags:
+ *       - Analytics
+ */
 /**
  * GET /analytics/overview
  */

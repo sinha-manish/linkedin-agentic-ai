@@ -1,8 +1,20 @@
+// posts.route.ts
+
 import { Router } from "express";
 const db = require("../../sequelize/models");
 
 const router = Router();
-
+/**
+ * @openapi
+ * /api/posts:
+ *   get:
+ *     summary: List saved LinkedIn posts
+ *     tags:
+ *       - Posts
+ *     responses:
+ *       200:
+ *         description: List of saved posts
+ */
 /**
  * GET /posts
  * Query:
@@ -26,6 +38,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+/**
+ * @openapi
+ * /api/posts/{id}:
+ *   get:
+ *     summary: Get a single LinkedIn post by ID
+ *     tags:
+ *       - Posts
+ */
 /**
  * GET /posts/:id
  */

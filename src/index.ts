@@ -76,13 +76,14 @@ app.use("/api/provider", providerRoutes);
 app.use("/api/agent/post", postWriterRoutes);
 app.use("/api/agent/optimize", optimizerRoutes);
 app.use("/api/workflow", workflowRoutes);
+app.use("/api/workflow/logs", workflowLogsRoutes);
 app.use("/api/posts", postsRoutes);
-app.use("/api/workflow", workflowLogsRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/feed", feedRoutes);
 app.use("/api/digest", digestRoutes);
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get("/api/openapi.json", (req, res) => res.json(swaggerSpec));
 
 // --------------------------
 // ERROR HANDLER

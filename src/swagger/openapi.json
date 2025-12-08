@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LinkedIn Agentic AI API",
+    "version": "1.0.0",
+    "description": "Complete API for LinkedIn Agentic AI system including agents, workflows, semantic search, analytics, feed, digests, providers, and posts."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000/api",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/agent/overview": {
+      "get": {
+        "summary": "Get AI analytics (topics, providers, engagement)",
+        "tags": ["Agents"],
+        "responses": {
+          "200": { "description": "Analytics data returned" }
+        }
+      }
+    },
+
+    "/agent/post/write": {
+      "post": {
+        "summary": "Generate LinkedIn post draft",
+        "tags": ["Agents"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "topic": { "type": "string" },
+                  "tone": { "type": "string" },
+                  "industry": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Generated post" } }
+      }
+    },
+
+    "/agent/optimize/optimize": {
+      "post": {
+        "summary": "Optimize post for engagement",
+        "tags": ["Agents"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "post": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Optimized post" } }
+      }
+    },
+
+    "/provider/set": {
+      "post": {
+        "summary": "Set AI provider (openai / gemini)",
+        "tags": ["Providers"],
+        "responses": { "200": { "description": "Provider updated" } }
+      }
+    },
+
+    "/provider/current": {
+      "get": {
+        "summary": "Get current AI provider",
+        "tags": ["Providers"],
+        "responses": { "200": { "description": "Provider returned" } }
+      }
+    },
+
+    "/workflow/generate-post": {
+      "post": {
+        "summary": "Run full workflow: topic → write → optimize → embed → save",
+        "tags": ["Workflows"],
+        "responses": { "200": { "description": "Workflow result returned" } }
+      }
+    },
+
+    "/workflow/logs": {
+      "get": {
+        "summary": "Fetch workflow logs",
+        "tags": ["Workflows"],
+        "parameters": [
+          { "in": "query", "name": "limit", "schema": { "type": "integer" } },
+          { "in": "query", "name": "offset", "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Workflow logs returned" } }
+      }
+    },
+
+    "/posts": {
+      "get": {
+        "summary": "List saved posts",
+        "tags": ["Posts"],
+        "parameters": [
+          { "in": "query", "name": "limit", "schema": { "type": "integer" } },
+          { "in": "query", "name": "offset", "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Posts returned" } }
+      }
+    },
+
+    "/posts/{id}": {
+      "get": {
+        "summary": "Get a specific LinkedIn post",
+        "tags": ["Posts"],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Post returned" } }
+      }
+    },
+
+    "/search": {
+      "get": {
+        "summary": "Semantic search using pgvector",
+        "tags": ["Search"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "Search results returned" } }
+      }
+    },
+
+    "/analytics/overview": {
+      "get": {
+        "summary": "System analytics",
+        "tags": ["Analytics"],
+        "responses": { "200": { "description": "Analytics returned" } }
+      }
+    },
+
+    "/feed/for-you": {
+      "get": {
+        "summary": "Personalized AI feed",
+        "tags": ["Feed"],
+        "parameters": [
+          { "in": "query", "name": "user_id", "schema": { "type": "string" } },
+          { "in": "query", "name": "interest", "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Feed returned" } }
+      }
+    },
+
+    "/digest/send": {
+      "get": {
+        "summary": "Send daily digest manually",
+        "tags": ["Digest"],
+        "responses": { "200": { "description": "Digest sent" } }
+      }
+    }
+  }
+}

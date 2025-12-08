@@ -1,0 +1,65 @@
+{
+  "info": {
+    "name": "LinkedIn Agentic AI API",
+    "_postman_id": "linked-in-agentic-ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Agent",
+      "item": [
+        { "name": "Overview", "request": { "method": "GET", "url": "{{base}}/agent/overview" }},
+        { "name": "Post Write", "request": { "method": "POST", "url": "{{base}}/agent/post/write", "body": { "mode": "raw", "raw": "{ \"topic\": \"AI future\" }" }}},
+        { "name": "Optimize Post", "request": { "method": "POST", "url": "{{base}}/agent/optimize/optimize", "body": { "mode": "raw", "raw": "{ \"post\": \"example text\" }" }}}
+      ]
+    },
+    {
+      "name": "Workflow",
+      "item": [
+        { "name": "Generate Post Workflow", "request": { "method": "POST", "url": "{{base}}/workflow/generate-post" }},
+        { "name": "Workflow Logs", "request": { "method": "GET", "url": "{{base}}/workflow/logs" }}
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        { "name": "Get Posts", "request": { "method": "GET", "url": "{{base}}/posts" }},
+        { "name": "Get Post by ID", "request": { "method": "GET", "url": "{{base}}/posts/1" }}
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        { "name": "Semantic Search", "request": { "method": "GET", "url": "{{base}}/search?query=ai future" }}
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        { "name": "Overview", "request": { "method": "GET", "url": "{{base}}/analytics/overview" }}
+      ]
+    },
+    {
+      "name": "Feed",
+      "item": [
+        { "name": "For You Feed", "request": { "method": "GET", "url": "{{base}}/feed/for-you?interest=ai" }}
+      ]
+    },
+    {
+      "name": "Digest",
+      "item": [
+        { "name": "Send Daily Digest", "request": { "method": "GET", "url": "{{base}}/digest/send" }}
+      ]
+    },
+    {
+      "name": "Provider",
+      "item": [
+        { "name": "Set Provider", "request": { "method": "POST", "url": "{{base}}/provider/set", "body": { "mode": "raw", "raw": "{ \"provider\": \"gemini\" }" }}},
+        { "name": "Current Provider", "request": { "method": "GET", "url": "{{base}}/provider/current" }}
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base", "value": "http://localhost:4000/api" }
+  ]
+}

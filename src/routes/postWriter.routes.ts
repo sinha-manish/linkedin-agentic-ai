@@ -1,8 +1,33 @@
+// postWriter.route.ts
+
 import { Router } from "express";
 import { postWriterAgent } from "../agents/postWriter.agent";
 
 const router = Router();
-
+/**
+ * @openapi
+ * /api/agent/post/write:
+ *   post:
+ *     summary: Generate a LinkedIn-style post using AI
+ *     tags:
+ *       - Agents
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               topic:
+ *                 type: string
+ *               tone:
+ *                 type: string
+ *               industry:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Returns an AI-generated post draft
+ */
 router.post("/write", async (req, res) => {
   try {
     const { topic, tone, industry } = req.body;

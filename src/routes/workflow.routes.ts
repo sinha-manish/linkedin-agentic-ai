@@ -1,19 +1,19 @@
+// workflow.route.ts
+
 import { Router } from "express";
 import { generatePostWorkflow } from "../workflows/generatePost.workflow";
 
 const router = Router();
 /**
  * @openapi
- * /workflow/generate-post:
+ * /api/workflow/generate-post:
  *   post:
- *     summary: Full workflow that generates & optimizes a LinkedIn post, then stores it with embeddings
+ *     summary: Full post-generation workflow (topic → write → optimize → embed → save)
  *     tags:
  *       - Workflows
- *     requestBody:
- *       required: false
  *     responses:
  *       200:
- *         description: Post created successfully
+ *         description: Workflow executed successfully
  */
 
 /**

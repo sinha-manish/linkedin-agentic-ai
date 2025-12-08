@@ -8,10 +8,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password123
       POSTGRES_DB: linkedin_ai
-    ports:
-      - "5432:5432"
     volumes:
       - pgdata_dev:/var/lib/postgresql/data
+    # NO port mapping needed!
+    # ports:
+    #   - "5432:5432"
 
   app:
     build:
@@ -21,8 +22,8 @@ services:
     env_file:
       - .env
     environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
+      DB_HOST: postgres     # internal docker hostname
+      DB_PORT: 5432         # internal DB port (default)
       DB_USER: postgres
       DB_PASS: password123
       DB_NAME: linkedin_ai
@@ -31,7 +32,7 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "4000:4000"
+      - "4000:4000"         # expose only the app
     depends_on:
       - postgres
     command: ["sh", "-c", "./scripts/wait-for-db.sh postgres 5432 npm run dev"]
