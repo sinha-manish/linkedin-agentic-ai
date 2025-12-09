@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light/Dark toggle */
+:root {
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
+}

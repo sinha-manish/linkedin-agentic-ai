@@ -12,7 +12,7 @@ services:
 
   app:
     build:
-      context: .
+      context: ./apps/backend
       dockerfile: Dockerfile
     image: linkedin-agentic-ai:latest
     restart: always

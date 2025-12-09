@@ -3,24 +3,28 @@ LinkedIn Agentic AI is a workflow-driven multi-agent system that automates Linke
 
 Run in Background
 
-docker compose -f docker-compose.dev.yml up -d --build
+docker compose -f infra/docker/docker-compose.dev.yml up -d --build
 
 
 Check running services:
 
-docker compose -f docker-compose.dev.yml ps
+docker compose -f infra/docker/docker-compose.dev.yml ps
 
 
 View logs (streaming):
 
-docker compose -f docker-compose.dev.yml logs -f app
+docker compose -f infra/docker/docker-compose.dev.yml logs -f backend
 
 
 Stop everything:
 
-docker compose -f docker-compose.dev.yml down
+docker compose -f infra/docker/docker-compose.dev.yml down
 
 
 Restart only app (without rebuilding):
 
-docker compose -f docker-compose.dev.yml up -d
+docker compose -f infra/docker/docker-compose.dev.yml up -d
+
+migrate
+
+docker compose -f infra/docker/docker-compose.dev.yml exec backend npx sequelize-cli db:migrate
