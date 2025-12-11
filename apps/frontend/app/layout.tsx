@@ -1,17 +1,16 @@
-// apps/frontend/app/layout.tsx
-import QueryProvider from "@/lib/QueryProvider";
-import "@/styles/globals.css";
-import { LayoutProps } from "@/types/appTypes";
+import "../styles/globals.css";
 import { Inter } from "next/font/google";
+
+export const metadata = {
+  title: "LinkedIn Agentic AI",
+};
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-gray-50 text-slate-900`}>
-        <QueryProvider>{children}</QueryProvider>
-      </body>
+    <html lang="en" className="bg-gray-50">
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

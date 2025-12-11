@@ -2,10 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Light/Dark toggle */
 :root {
   color-scheme: light;
 }
 :root.dark {
   color-scheme: dark;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+:root {
+  --radius: 12px;
+
+  --bg: #fafafa;
+  --bg-panel: #ffffff;
+  --bg-elevated: rgba(255,255,255,0.6);
+
+  --border: rgba(0,0,0,0.08);
+  --text-1: #111;
+  --text-2: #555;
+  --brand: #0A66C2; /* LinkedIn blue */
+  --brand-soft: rgba(10,102,194,0.08);
+}
+
+.dark {
+  --bg: #0c0c0c;
+  --bg-panel: #111;
+  --bg-elevated: rgba(20,20,20,0.5);
+
+  --border: rgba(255,255,255,0.08);
+  --text-1: #fff;
+  --text-2: #bbb;
 }
